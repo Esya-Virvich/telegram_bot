@@ -1,0 +1,197 @@
+import telebot
+from telebot import types
+
+# Вставьте свой токен Telegram Bot API
+TOKEN = '7033540296:AAEty5FAcjHarbN0uj0qEYvxhqibwZs6jjI'
+user_data = {}
+
+# Инициализация бота
+bot = telebot.TeleBot(TOKEN)
+
+# Обработчик команды /start
+@bot.message_handler(commands=['start'])
+def send_welcome(message):
+    # Создаем клавиатуру с кнопками
+    markup = types.ReplyKeyboardMarkup(row_width=1)
+    btn_about = types.KeyboardButton('О нас')
+    btn_programs = types.KeyboardButton('Наши программы')
+    btn_evgenia = types.KeyboardButton('Евгения Вырвич')
+    markup.add(btn_about, btn_programs, btn_evgenia)
+
+    # Отправляем приветственное сообщение с клавиатурой
+    bot.reply_to(message, "Добро пожаловать в Мастерскую коучинга и фасилитации Евгении Вырвич! Что вы хотите о нас узнать?", reply_markup=markup)
+
+# Обработчик нажатия кнопки "О нас"
+@bot.message_handler(func=lambda message: message.text == 'О нас')
+def about_us(message):
+    # Выводим краткое описание
+    bot.reply_to(message, "Мастерская коучинга и фасилитации Евгении Вырвич помогает в решении различных бизнес-задач уже более 8 лет. Мы специализируемся на:\n\n- Улучшении коммуникации и разрешении конфликтов в коллективе.\n- Развитии лидерских навыков у руководителей.\n- Повышении мотивации и эффективности работы сотрудников.\n- Разработке стратегии развития бизнеса и постановке целей.\n- Разрешении проблем с командной работой и сотрудничеством.\n- Повышении профессиональной компетенции и самоорганизации сотрудников.\n- Развитии эмоционального интеллекта у персонала.\n- Улучшении управленческих навыков и принятии решений.\n\nПодробнее вы можете узнать на нашем сайте: https://vyrvis.ru/#360183947")
+
+    # Создаем клавиатуру с кнопкой "Назад"
+    markup = types.ReplyKeyboardMarkup(row_width=1)
+    btn_back = types.KeyboardButton('Назад')
+    markup.add(btn_back)
+
+    # Отправляем клавиатуру с кнопкой "Назад"
+    bot.send_message(message.chat.id, "Вернуться назад", reply_markup=markup)
+
+# Обработчик нажатия кнопки "Назад"
+@bot.message_handler(func=lambda message: message.text == 'Назад')
+def back(message):
+    # Отправляем приветственное сообщение с клавиатурой
+    send_welcome(message)
+@bot.message_handler(func=lambda message: message.text == 'О нас')
+def about_us(message):
+    # Выводим краткое описание
+    bot.reply_to(message, "Мастерская коучинга и фасилитации Евгении Вырвич помогает в решении различных бизнес-задач уже более 8 лет. Мы специализируемся на:\n\n- Улучшении коммуникации и разрешении конфликтов в коллективе.\n- Развитии лидерских навыков у руководителей.\n- Повышении мотивации и эффективности работы сотрудников.\n- Разработке стратегии развития бизнеса и постановке целей.\n- Разрешении проблем с командной работой и сотрудничеством.\n- Повышении профессиональной компетенции и самоорганизации сотрудников.\n- Развитии эмоционального интеллекта у персонала.\n- Улучшении управленческих навыков и принятии решений.\n\nПодробнее вы можете узнать на нашем сайте: https://vyrvis.ru/#360183947")
+
+    # Создаем клавиатуру с кнопкой "Назад"
+    markup = types.ReplyKeyboardMarkup(row_width=1)
+    btn_back = types.KeyboardButton('Назад')
+    markup.add(btn_back)
+
+    # Отправляем клавиатуру с кнопкой "Назад"
+    bot.send_message(message.chat.id, "Вернуться назад", reply_markup=markup)
+
+# Обработчик нажатия кнопки "Назад"
+@bot.message_handler(func=lambda message: message.text == 'Назад')
+def back(message):
+    # Отправляем приветственное сообщение с клавиатурой
+    send_welcome(message)
+
+@bot.message_handler(func=lambda message: message.text == 'Наши программы')
+def our_programs(message):
+    # Создаем клавиатуру с кнопками
+    markup = types.ReplyKeyboardMarkup(row_width=1)
+    btn_programs_leaders = types.KeyboardButton('Программы для руководителей')
+    btn_programs_teams = types.KeyboardButton('Программы развития команд')
+    btn_individual_programs = types.KeyboardButton('Индивидуальные программы')
+    btn_coach_programs = types.KeyboardButton('Программы для коучей')
+    btn_application = types.KeyboardButton('Подать заявку на программу')
+
+    markup = types.ReplyKeyboardMarkup(row_width=1)
+    btn_back = types.KeyboardButton('Назад')
+    markup.add(btn_back)
+
+    markup.add(btn_programs_leaders, btn_programs_teams, btn_individual_programs, btn_coach_programs, btn_application)
+
+    # Отправляем сообщение с клавиатурой
+    bot.reply_to(message, "Выберите интересующую вас программу:", reply_markup=markup)
+
+@bot.message_handler(func=lambda message: message.text == 'Программы для руководителей')
+def programs_leaders(message):
+    bot.reply_to(message, "Станьте лучшим руководителем с нашими программами развития!\n"
+        "Приглашаем руководителей на интенсивные программы развития с опытными бизнес-тренерами! Обретите новые знания, лидерские навыки и уверенность в принятии решений. Поднимите эффективность вашей команды, свою энергию и достигайте новых высот в бизнесе.\n"
+        "Присоединяйтесь к нам, делайте первый шаг! \n" \
+        "Подробнее по ссылке: https://vyrvis.ru/leader/")
+
+
+    # Обработчик нажатия кнопки "Программы развития команд"
+@bot.message_handler(func=lambda message: message.text == 'Программы развития команд')
+def programs_teams(message):
+    bot.reply_to(message, "Приглашаем вашу команду на уникальные программы развития, которые проводит Мастерская коучинга и фасилитации Евгении Вырвич!\n"
+        "Улучшите коммуникацию, сотрудничество и эффективность работы вместе. Развивайте лидерские навыки, разрешайте конфликты и достигайте новых успехов вместе с нами.\n"
+        "Присоединяйтесь к нашим командным тренингам и станьте сильной и единой командой!\n"
+        "Подробнее по ссылке: https://vyrvis.ru/corp/")
+
+
+    # Обработчик нажатия кнопки "Индивидуальные программы"
+@bot.message_handler(func=lambda message: message.text == 'Индивидуальные программы')
+def individual_programs(message):
+    bot.reply_to(message, "Мы помогаем лидерам и руководителям развиваться индивидуально! \n"
+                              "Профессионалы мастерской Евгении Вырвич с многолетним опытом - ваши надежные партнеры на пути перемен.\n"
+                              "Наши программы индивидуального развития созданы для того, чтобы вы достигли новых высот. Благодаря нашему опыту и знаниям, вы сможете получить все необходимое для успешного лидерства. \n"
+                              "Присоединяйтесь к нам, и мы вместе будем двигаться к новым вершинам успеха!\n"
+                              "Подробнее по ссылке: https://vyrvis.ru/personal")
+
+
+    # Обработчик нажатия кнопки "Программы для коучей"
+@bot.message_handler(func=lambda message: message.text == 'Программы для коучей')
+def coach_programs(message):
+    bot.reply_to(message, "Станьте успешным коучем с нашей программой повышения квалификации!\n"
+                              "Наш опыт, знания и поддержка помогут вам стать лучшими в своем деле. Каждый из наших тренеров прошел ваш путь и знает, что и когда нужно сделать, чтобы клиентов становилось больше, а удовольствие от работы не иссякало. \n"
+                              "Присоединяйтесь к нашей мастерской и начинайте свой путь к успеху!\n"
+                              "Подробнее по ссылке: https://vyrvis.ru/coach")
+
+    # Обработчик нажатия кнопки "Подать заявку на программу"
+@bot.message_handler(func=lambda message: message.text == 'Подать заявку на программу')
+def start_message(message):
+    bot.send_message(message.chat.id, "Здравствуйте! Для подачи заявки на программу, пожалуйста, введите свое имя:")
+    bot.register_next_step_handler(message, get_name)
+
+
+# Функция для получения имени пользователя
+def get_name(message):
+    user_data[message.chat.id] = {'name': message.text}
+    bot.send_message(message.chat.id, "Теперь введите вашу фамилию:")
+    bot.register_next_step_handler(message, get_surname)
+
+
+# Функция для получения фамилии пользователя
+def get_surname(message):
+    user_data[message.chat.id]['surname'] = message.text
+    bot.send_message(message.chat.id, "Выберите программу, на которую хотите подать заявку:")
+    bot.register_next_step_handler(message, get_program)
+
+
+# Функция для получения выбранной программы
+def get_program(message):
+    user_data[message.chat.id]['program'] = message.text
+    bot.send_message(message.chat.id, "Введите ваш номер телефона:")
+    bot.register_next_step_handler(message, get_phone)
+
+
+# Функция для получения номера телефона пользователя
+def get_phone(message):
+    user_data[message.chat.id]['phone'] = message.text
+    bot.send_message(message.chat.id, "Введите вашу электронную почту:")
+    bot.register_next_step_handler(message, get_email)
+
+
+# Функция для получения электронной почты пользователя
+def get_email(message):
+    user_data[message.chat.id]['email'] = message.text
+    bot.send_message(message.chat.id, "Введите ваше имя пользователя в Telegram:")
+    bot.register_next_step_handler(message, get_telegram_username)
+
+
+# Функция для получения имени пользователя в Telegram
+def get_telegram_username(message):
+    user_data[message.chat.id]['telegram_username'] = message.text
+    send_user_data(message.chat.id)
+
+
+# Функция для отправки информации о пользователе
+def send_user_data(chat_id):
+    user_info = user_data[chat_id]
+    info_text = f"Name: {user_info['name']}\nSurname: {user_info['surname']}\nProgramm: {user_info['program']}\nPhone_number: {user_info['phone']}\nEmail: {user_info['email']}\nName of user in Telegram: {user_info['telegram_username']}"
+    bot.send_message(chat_id, "Вот ваша информация:\n" + info_text + "\nПоздравляем с подачей заявки! Остался один шаг - перешлите данное сообщение Евгении Вырвич \n"
+                                                                     "Пересылать сюда: @EVyrvich")
+
+
+    # Записываем данные в файл
+    file_name = f"user_data_{user_info['telegram_username']}.txt"
+    with open(file_name, "w") as file:
+        file.write(info_text)
+
+
+@bot.message_handler(func=lambda message: message.text == 'Евгения Вырвич')
+def Evgenia_Vyrvich(message):
+        # Выводим краткое описание
+    bot.reply_to(message, "Евгения Вырвич основала  \""
+                              "Мастерскую коучинга и фасилитации\""
+                              " в 2016 году, уйдя с позиции  наёмного топ-менеджера.\n"
+                              "Сегодня Евгения Вырвич:\n"
+                              "1) Коуч для руководителей с международной сертификацией PCC ICF\n"
+                              "2) Ведущая командных сессий разного формата (стратегические,  креативные, сессии разрешения конфликтов, Lego Serious Play сессии и т.д.)\n"
+                              "3) Тренер программы обучения коучингу в МИПОПП \n"
+                              "4) Бизнес-тренер")
+
+    # Создаем клавиатуру с кнопкой "Назад"
+    markup = types.ReplyKeyboardMarkup(row_width=1)
+    btn_back = types.KeyboardButton('Назад')
+    markup.add(btn_back)
+
+
+# Запуск бота
+bot.polling()
